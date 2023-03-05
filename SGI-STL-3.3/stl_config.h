@@ -27,119 +27,115 @@
 #ifndef __STL_CONFIG_H
 # define __STL_CONFIG_H
 
-// Flags:
-// * __STL_NO_BOOL: defined if the compiler doesn't have bool as a builtin
-//   type.
-// * __STL_HAS_WCHAR_T: defined if the compier has wchar_t as a builtin type.
-// * __STL_NO_DRAND48: defined if the compiler doesn't have the drand48 
-//   function.
-// * __STL_STATIC_TEMPLATE_MEMBER_BUG: defined if the compiler can't handle
-//   static members of template classes.
-// * __STL_STATIC_CONST_INIT_BUG: defined if the compiler can't handle a
-//   constant-initializer in the declaration of a static const data member
-//   of integer type.  (See section 9.4.2, paragraph 4, of the C++ standard.)
-// * __STL_CLASS_PARTIAL_SPECIALIZATION: defined if the compiler supports
-//   partial specialization of template classes.
-// * __STL_PARTIAL_SPECIALIZATION_SYNTAX: defined if the compiler 
-//   supports partial specialization syntax for full specialization of
-//   class templates.  (Even if it doesn't actually support partial 
-//   specialization itself.)
-// * __STL_FUNCTION_TMPL_PARTIAL_ORDER: defined if the compiler supports
-//   partial ordering of function templates.  (a.k.a partial specialization
-//   of function templates.)
-// * __STL_MEMBER_TEMPLATES: defined if the compiler supports template
-//   member functions of classes.
-// * __STL_MEMBER_TEMPLATE_CLASSES: defined if the compiler supports 
-//   nested classes that are member templates of other classes.
-// * __STL_TEMPLATE_FRIENDS: defined if the compiler supports templatized
-//   friend declarations.
-// * __STL_EXPLICIT_FUNCTION_TMPL_ARGS: defined if the compiler 
-//   supports calling a function template by providing its template
-//   arguments explicitly.
-// * __STL_LIMITED_DEFAULT_TEMPLATES: defined if the compiler is unable
-//   to handle default template parameters that depend on previous template
-//   parameters.
-// * __STL_NON_TYPE_TMPL_PARAM_BUG: defined if the compiler has trouble with
-//   function template argument deduction for non-type template parameters.
-// * __SGI_STL_NO_ARROW_OPERATOR: defined if the compiler is unable
-//   to support the -> operator for iterators.
-// * __STL_DEFAULT_CONSTRUCTOR_BUG: defined if T() does not work properly
-//   when T is a builtin type.
-// * __STL_USE_EXCEPTIONS: defined if the compiler (in the current compilation
-//   mode) supports exceptions.
-// * __STL_USE_NAMESPACES: defined if the compiler has the necessary
-//   support for namespaces.
-// * __STL_NO_EXCEPTION_HEADER: defined if the compiler does not have a
-//   standard-conforming header <exception>.
-// * __STL_NO_BAD_ALLOC: defined if the compiler does not have a <new>
-//   header, or if <new> does not contain a bad_alloc class.  If a bad_alloc
-//   class exists, it is assumed to be in namespace std.
-// * __STL_SGI_THREADS: defined if this is being compiled for an SGI IRIX
-//   system in multithreaded mode, using native SGI threads instead of 
-//   pthreads.
-// * __STL_WIN32THREADS: defined if this is being compiled on a WIN32
-//   compiler in multithreaded mode.
-// * __STL_PTHREADS: defined if we should use portable pthreads
-//   synchronization.
-// * __STL_UITHREADS: defined if we should use UI / solaris / UnixWare threads
-//   synchronization.  UIthreads are similar to pthreads, but are based 
-//   on an earlier version of the Posix threads standard.
-// * __STL_LONG_LONG if the compiler has long long and unsigned long long
-//   types.  (They're not in the C++ standard, but they are expected to be 
-//   included in the forthcoming C9X standard.)
-// * __STL_THREADS is defined if thread safety is needed.
-// * __STL_VOLATILE is defined to be "volatile" if threads are being
-//   used, and the empty string otherwise.
-// * __STL_USE_CONCEPT_CHECKS enables some extra compile-time error
-//   checking to make sure that user-defined template arguments satisfy
-//   all of the appropriate requirements.  This may result in more
-//   comprehensible error messages.  It incurs no runtime overhead.  This 
-//   feature requires member templates and partial specialization.
-// * __STL_NO_USING_CLAUSE_IN_CLASS: The compiler does not handle "using"
-//   clauses inside of class definitions.
-// * __STL_NO_FRIEND_TEMPLATE_CLASS: The compiler does not handle friend
-//   declaractions where the friend is a template class.
-// * __STL_NO_FUNCTION_PTR_IN_CLASS_TEMPLATE: The compiler does not
-//   support the use of a function pointer type as the argument
-//   for a template.
-// * __STL_MEMBER_TEMPLATE_KEYWORD: standard C++ requires the template
-//   keyword in a few new places (14.2.4).  This flag is set for
-//   compilers that support (and require) this usage.
-
-
-// User-settable macros that control compilation:
-// * __STL_USE_SGI_ALLOCATORS: if defined, then the STL will use older
-//   SGI-style allocators, instead of standard-conforming allocators,
-//   even if the compiler supports all of the language features needed
-//   for standard-conforming allocators.
-// * __STL_NO_NAMESPACES: if defined, don't put the library in namespace
-//   std, even if the compiler supports namespaces.
-// * __STL_NO_RELOPS_NAMESPACE: if defined, don't put the relational
-//   operator templates (>, <=. >=, !=) in namespace std::rel_ops, even
-//   if the compiler supports namespaces and partial ordering of
-//   function templates.
-// * __STL_ASSERTIONS: if defined, then enable runtime checking through the
-//   __stl_assert macro.
-// * _PTHREADS: if defined, use Posix threads for multithreading support.
-// * _UITHREADS:if defined, use SCO/Solaris/UI threads for multithreading 
-//   support
-// * _NOTHREADS: if defined, don't use any multithreading support.  
-// * _STL_NO_CONCEPT_CHECKS: if defined, disables the error checking that
-//   we get from __STL_USE_CONCEPT_CHECKS.
-// * __STL_USE_NEW_IOSTREAMS: if defined, then the STL will use new,
-//   standard-conforming iostreams (e.g. the <iosfwd> header).  If not
-//   defined, the STL will use old cfront-style iostreams (e.g. the
-//   <iostream.h> header).
-
-// Other macros defined by this file:
-
-// * bool, true, and false, if __STL_NO_BOOL is defined.
-// * typename, as a null macro if it's not already a keyword.
-// * explicit, as a null macro if it's not already a keyword.
-// * namespace-related macros (__STD, __STL_BEGIN_NAMESPACE, etc.)
-// * exception-related macros (__STL_TRY, __STL_UNWIND, etc.)
-// * __stl_assert, either as a test or as a null macro, depending on
-//   whether or not __STL_ASSERTIONS is defined.
+//标志：
+//*__STL_NO_BOOL：如果编译器没有内置 bool 则定义
+//类型。
+//*__STL_HAS_WCHAR_T：定义编译器是否将 wchar_t 作为内置类型。
+//*__STL_NO_DRAND48：如果编译器没有drand48则定义
+//功能。
+//*__STL_STATIC_TEMPLATE_MEMBER_BUG：如果编译器无法处理则定义
+//模板类的静态成员。
+//*__STL_STATIC_CONST_INIT_BUG：如果编译器不能处理一个定义
+//静态常量数据成员声明中的常量初始化器
+//整数类型。 （参见 C++ 标准第 9.4.2 节第 4 段。）
+//*__STL_CLASS_PARTIAL_SPECIALIZATION：如果编译器支持则定义
+//模板类的部分特化。
+//*__STL_PARTIAL_SPECIALIZATION_SYNTAX：如果编译器定义
+//支持完全专业化的部分专业化语法
+//类模板。 （即使它实际上不支持部分
+//专业本身。）
+//*__STL_FUNCTION_TMPL_PARTIAL_ORDER：如果编译器支持则定义
+//函数模板的部分排序。 （又名部分专业化
+//函数模板。）
+//*__STL_MEMBER_TEMPLATES：定义编译器是否支持模板
+//类的成员函数。
+//*__STL_MEMBER_TEMPLATE_CLASSES：如果编译器支持则定义
+//作为其他类的成员模板的嵌套类。
+//*__STL_TEMPLATE_FRIENDS：定义编译器是否支持模板化
+//朋友声明。
+//*__STL_EXPLICIT_FUNCTION_TMPL_ARGS：如果编译器定义
+//支持通过提供模板调用函数模板
+//明确论证。
+//*__STL_LIMITED_DEFAULT_TEMPLATES：如果编译器无法定义
+//处理依赖于先前模板的默认模板参数
+//参数。
+//*__STL_NON_TYPE_TMPL_PARAM_BUG：定义编译器是否有问题
+//非类型模板参数的函数模板参数推导。
+//*__SGI_STL_NO_ARROW_OPERATOR: 如果编译器无法定义
+//支持迭代器的 -> 运算符。
+//*__STL_DEFAULT_CONSTRUCTOR_BUG：如果 T() 不能正常工作则定义
+//当 T 是内置类型时。
+//*__STL_USE_EXCEPTIONS：如果编译器定义（在当前编译中
+//模式）支持异常。
+//*__STL_USE_NAMESPACES：如果编译器有必要的定义
+//支持命名空间。
+//*__STL_NO_EXCEPTION_HEADER：定义如果编译器没有
+//符合标准的标头 <exception>。
+//*__STL_NO_BAD_ALLOC：如果编译器没有<new>定义
+//标头，或者如果 <new> 不包含 bad_alloc 类。如果一个 bad_alloc
+//类存在，假定它在命名空间 std 中。
+//*__STL_SGI_THREADS：定义是否为 SGI IRIX 编译
+//多线程模式下的系统，使用本地 SGI 线程而不是
+//线程。
+//*__STL_WIN32THREADS：定义是否在 WIN32 上编译
+//多线程模式下的编译器。
+//*__STL_PTHREADS：定义我们是否应该使用可移植的 pthreads
+//同步。
+//*__STL_UITHREADS：定义我们是否应该使用 UI /solaris /UnixWare 线程
+//同步。 UIthreads 类似于 pthreads，但是基于
+//在早期版本的 Posix 线程标准上。
+//*__STL_LONG_LONG 如果编译器有 long long 和 unsigned long long
+//类型。 （它们不在 C++ 标准中，但它们应该是
+//包含在即将发布的 C9X 标准中。）
+//*如果需要线程安全，则定义 __STL_THREADS。
+//*__STL_VOLATILE 被定义为“volatile”，如果线程被
+//使用，否则为空字符串。
+//*__STL_USE_CONCEPT_CHECKS 启用一些额外的编译时错误
+//检查以确保用户定义的模板参数满足
+//所有适当的要求。这可能会导致更多
+//可理解的错误信息。它不会产生运行时开销。这
+//功能需要成员模板和部分专业化。
+//*__STL_NO_USING_CLAUSE_IN_CLASS：编译器不处理“使用”
+//类定义中的子句。
+//*__STL_NO_FRIEND_TEMPLATE_CLASS: 编译器不处理友元
+//friend 是模板类的声明。
+//*__STL_NO_FUNCTION_PTR_IN_CLASS_TEMPLATE：编译器不
+//支持使用函数指针类型作为参数
+//为模板。
+//*__STL_MEMBER_TEMPLATE_KEYWORD: 标准 C++ 需要模板
+//一些新地方 (14.2.4) 中的关键字。这个标志是为
+//支持（并要求）这种用法的编译器。
+//控制编译的用户可设置宏：
+//*__STL_USE_SGI_ALLOCATORS：如果定义了，那么STL将使用旧的
+//SGI 风格的分配器，而不是符合标准的分配器，
+//即使编译器支持所有需要的语言特性
+//用于符合标准的分配器。
+//*__STL_NO_NAMESPACES: 如果定义了，不要将库放在命名空间中
+//std，即使编译器支持命名空间。
+//*__STL_NO_RELOPS_NAMESPACE: 如果定义了，不要把关系
+//命名空间 std::rel_ops 中的运算符模板 (>, <=. >=, !=)，甚至
+//如果编译器支持命名空间和部分排序
+//功能模板。
+//*__STL_ASSERTIONS：如果已定义，则启用运行时检查
+//__stl_assert 宏。
+//*_PTHREADS：如果已定义，则使用 Posix 线程来支持多线程。
+//*_UITHREADS:如果定义，使用 SCO/Solaris/UI 线程进行多线程处理
+//支持
+//*_NOTHREADS：如果已定义，则不使用任何多线程支持。
+//*_STL_NO_CONCEPT_CHECKS：如果定义，则禁用错误检查
+//我们从 __STL_USE_CONCEPT_CHECKS 得到。
+//*__STL_USE_NEW_IOSTREAMS：如果定义了，那么STL将使用新的，
+//符合标准的 iostream（例如 <iosfwd> 标头）。如果不
+//定义后，STL 将使用旧的 cfront 风格的 iostream（例如
+//<iostream.h> 标头）。
+//该文件定义的其他宏：
+//*bool、true 和 false，如果定义了 __STL_NO_BOOL。
+//*typename，如果它还不是关键字，则作为空宏。
+//*显式，如果它还不是关键字，则作为空宏。
+//*命名空间相关的宏（__STD、__STL_BEGIN_NAMESPACE 等）
+//*与异常相关的宏（__STL_TRY、__STL_UNWIND 等）
+//*__stl_assert，作为测试或空宏，具体取决于
+//__STL_ASSERTIONS 是否被定义。
 
 # if defined(_PTHREADS) && !defined(_NOTHREADS)
 #     define __STL_PTHREADS
